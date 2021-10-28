@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TeamDashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= link_to "Teams", teams_path %>
+    <%= link_to "Responses", responses_path %>
+    <%= link_to "Submissions", submissions_path %>
+    <%= link_to "Surveys", surveys_path %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

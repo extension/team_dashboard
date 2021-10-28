@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @response.question %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @response.score %>
+</p>
+
+<p>
+  <strong>Time entered:</strong>
+  <%= @response.time_entered %>
+</p>
+
+<p>
+  <strong>Question number:</strong>
+  <%= @response.question_number %>
+</p>
+
+<p>
+  <strong>Submission:</strong>
+  <%= @response.submission_id %>
+</p>
+
+<%= link_to 'Edit', edit_response_path(@response) %> |
+<%= link_to 'Back', responses_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: MyText
+  score: 1
+  time_entered: 2021-10-28 10:35:12
+  question_number: MyString
+  submission: one
+
+two:
+  question: MyText
+  score: 1
+  time_entered: 2021-10-28 10:35:12
+  question_number: MyString
+  submission: two
