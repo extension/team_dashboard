@@ -20,7 +20,11 @@
 <% @survey.submissions.each do |submission| %>
   <tr>
     <td><%= link_to submission.submitted_date, submission %></td>
-
+    <td><%= submission.psychological_safety_avg_score.round(2) %></td>
+    <td><%= submission.dependability_avg_score.round(2) %></td>
+    <td><%= submission.structure_clarity_avg_score.round(2) %></td>
+    <td><%= submission.meaning_avg_score.round(2) %></td>
+    <td><%= submission.impact_avg_score.round(2) %></td>
   </tr>
 <% end %>
 </table>
