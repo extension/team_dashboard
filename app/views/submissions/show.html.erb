@@ -1,14 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Submitted date:</strong>
-  <%= @submission.submitted_date %>
-</p>
 
-<p>
-  <strong>Survey:</strong>
-  <%= @submission.survey_id %>
-</p>
+<h1><%= link_to @submission.survey.team.name, @submission.survey.team %></h1>
+<h2><%= @submission.survey.name %></h2>
+<h3>Submission <%= @submission.submitted_date %></h3>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Score</th>
+      <th>Time entered</th>
+      <th>Question number</th>
+      <th>Submission</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submission.responses.each do |response| %>
+      <tr>
+        <td><%= response.question %></td>
+        <td><%= response.score %></td>
+        <td><%= response.time_entered %></td>
+        <td><%= response.question_number %></td>
+        <td><%= response.submission_id %></td>
+        <td><%= link_to 'Show', response %></td>
+        <td><%= link_to 'Edit', edit_response_path(response) %></td>
+        <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
 <%= link_to 'Back', submissions_path %>
