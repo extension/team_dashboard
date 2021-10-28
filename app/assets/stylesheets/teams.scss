@@ -18,7 +18,7 @@ table caption {
 }
 
 table tr {
-  background-color: #f8f8f8;
+  // background-color: #f8f8f8;
   border: 1px solid #ddd;
   padding: .35em;
 }
@@ -34,4 +34,24 @@ table th {
   letter-spacing: .1em;
   // text-transform: uppercase;
   text-align: left;
+  background: #ddd;
 }
+
+.table-header {text-align: center; font-size: 1.2em;}
+.empty {background: #fff;}
+
+.responses tr:nth-child(3n),
+.responses tr:nth-child(3n-1),
+.responses tr:nth-child(3n-2){
+    background: #fff;
+}
+
+.responses tr:nth-child(6n),
+.responses tr:nth-child(6n-1),
+.responses tr:nth-child(6n-2){
+    background: #eee;
+}
+
+.responses-scores {display: flex; gap: 20px;}
+.scores {background: #e2fbff;}
+.scores td {background: #e2fbff; font-size: 1.2em !important;}
