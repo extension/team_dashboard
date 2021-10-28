@@ -20,7 +20,6 @@
 <% @survey.submissions.each do |submission| %>
   <tr>
     <td><%= link_to submission.submitted_date, submission %></td>
-    <td><%= submission.get_psychological_safety_score(submission) %></td>
 
   </tr>
 <% end %>
