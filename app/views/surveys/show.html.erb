@@ -2,13 +2,13 @@
 
 <h1><%= link_to @survey.team.name, @survey.team %></h1>
 <h2><%= @survey.name %></h2>
-
+<p><%= link_to "view all surveys", @survey.team %></p>
 <table>
 
   <thead>
     <tr>
       <th class="empty"></th>
-      <th class="table-header" colspan="5">Average score (Questions)</th>
+      <th class="table-header" colspan="5">Individual Average Score (Questions)</th>
     </tr>
     <tr>
       <th>Submission</th>
@@ -23,11 +23,11 @@
 <% @survey.submissions.each do |submission| %>
   <tr>
     <td><%= link_to submission.submitted_date, submission %></td>
-    <td><%= submission.psychological_safety_avg_score.round(2) %></td>
-    <td><%= submission.dependability_avg_score.round(2) %></td>
-    <td><%= submission.structure_clarity_avg_score.round(2) %></td>
-    <td><%= submission.meaning_avg_score.round(2) %></td>
-    <td><%= submission.impact_avg_score.round(2) %></td>
+    <td><%= submission.individual_psychological_safety_avg_score.round(2) %></td>
+    <td><%= submission.individual_dependability_avg_score.round(2) %></td>
+    <td><%= submission.individual_structure_clarity_avg_score.round(2) %></td>
+    <td><%= submission.individual_meaning_avg_score.round(2) %></td>
+    <td><%= submission.individual_impact_avg_score.round(2) %></td>
   </tr>
 <% end %>
 </table>

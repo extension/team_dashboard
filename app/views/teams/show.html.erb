@@ -7,19 +7,28 @@
 <table>
   <thead>
     <tr>
+      <th class="empty" colspan="2"></th>
+      <th class="table-header" colspan="5">Aggregate Average Score (Questions)</th>
+    </tr>
+    <tr>
       <th>Survey</th>
       <th>Submissions</th>
-      <th>1-3 avg score</th>
-      <th>4-6 avg score</th>
-      <th>7-9 avg score</th>
-      <th>10-12 avg score</th>
-      <th>13-15 avg score</th>
+      <th>Psychological Safety (1-3)</th>
+      <th>Dependability (4-6)</th>
+      <th>Structure Clarity (7-9)</th>
+      <th>Meaning (10-12)</th>
+      <th>Impact (13-15)</th>
     </tr>
   </thead>
 <% @team.surveys.each do |survey| %>
   <tr>
     <td><%= link_to survey.name, survey %></td>
     <td><%= survey.submissions.count %></td>
+    <td><%= survey.aggregate_psychological_safety_avg_score.round(2) -%></td>
+    <td><%= survey.aggregate_dependability_avg_score.round(2) -%></td>
+    <td><%= survey.aggregate_structure_clarity_avg_score.round(2) -%></td>
+    <td><%= survey.aggregate_meaning_avg_score.round(2) -%></td>
+    <td><%= survey.aggregate_impact_avg_score.round(2) -%></td>
   </tr>
 <% end %>
 </table>
