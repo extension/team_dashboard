@@ -1,7 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* A survey is a grouping of submissions (Initial, second, third...)
+* A submission is a google form submission
 
 Things you may want to cover:
 
