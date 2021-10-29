@@ -15,12 +15,12 @@ class Response < ApplicationRecord
         #create submission
         submission = Submission.where(survey: survey,
                                       submitted_date: row[0]).first_or_create
-        Response.create!(submission: submission,
+        Response.where(submission: submission,
                        question: row.headers[i+4],
                        score: row[i+4],
                        time_entered: DateTime.strptime(row[0], '%m/%d/%Y %H:%M:%S'),
                        question_number: count
-                      )
+                      ).first_or_create
         count += 1
       end
     end
