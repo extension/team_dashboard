@@ -1,14 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Submitted date:</strong>
-  <%= @submission.submitted_date %>
-</p>
 
-<p>
-  <strong>Survey:</strong>
-  <%= @submission.survey_id %>
-</p>
+<h1><%= link_to @submission.survey.team.name, @submission.survey.team %></h1>
+<h2><%= @submission.survey.name %></h2>
+<p><%= link_to "view all submissions", @submission.survey %></p>
+<h1>Submission <%= @submission.submitted_date %></h1>
 
+<div class="responses-scores">
+  <div>
+    <h2>Responses</h2>
+    <table class="responses">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Question</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @submission.responses.each do |response| %>
+          <tr>
+            <td><%= response.question_number %></td>
+            <td><%= response.question %></td>
+            <td><%= response.score %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <h2>Averaged Scores</h2>
+    <table class="scores">
+    <tr>
+      <td>Psychological Safety (1-3)</td>
+      <td><strong><%= @submission.individual_psychological_safety_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Dependability (4-6)</td>
+      <td><strong><%= @submission.individual_dependability_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Structure Clarity (7-9)</td>
+      <td><strong><%= @submission.individual_structure_clarity_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Meaning (10-12)</td>
+      <td><strong><%= @submission.individual_meaning_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Impact (13-15)</td>
+      <td><strong><%= @submission.individual_impact_avg_score.round(2) %></strong></td>
+    </tr>
+    </table>
+  </div>
+
+
+</div>
 <%= link_to 'Edit', edit_submission_path(@submission) %> |
 <%= link_to 'Back', submissions_path %>
