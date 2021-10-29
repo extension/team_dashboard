@@ -8,6 +8,34 @@ class TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
+
+    # surveys_hash = {"Initial Baseline Survey"=>5.4, "Second Survey"=>7.8, "Third Survey"=>8.1, "Final Survey"=>8.7}
+
+    @psychological_safety_surveys = Hash.new
+    @team.surveys.each do |survey|
+      @psychological_safety_surveys[survey.name] = survey.aggregate_psychological_safety_avg_score.to_d.round(2)
+    end
+
+    @dependability_surveys = Hash.new
+    @team.surveys.each do |survey|
+      @dependability_surveys[survey.name] = survey.aggregate_dependability_avg_score.to_d.round(2)
+    end
+
+    @structure_clarity_surveys = Hash.new
+    @team.surveys.each do |survey|
+      @structure_clarity_surveys[survey.name] = survey.aggregate_structure_clarity_avg_score.to_d.round(2)
+    end
+
+    @meaning_surveys = Hash.new
+    @team.surveys.each do |survey|
+      @meaning_surveys[survey.name] = survey.aggregate_meaning_avg_score.to_d.round(2)
+    end
+
+    @impact_surveys = Hash.new
+    @team.surveys.each do |survey|
+      @impact_surveys[survey.name] = survey.aggregate_impact_avg_score.to_d.round(2)
+    end
+
   end
 
   # GET /teams/new

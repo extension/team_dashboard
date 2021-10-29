@@ -1,0 +1,38 @@
+<%
+def largest_hash_key(hash)
+  hash.max_by{|k,v| v}
+end
+
+def smallest_hash_key(hash)
+  hash.min_by{|k,v| v}
+end
+%>
+
+
+<div class="dashboard-item">
+  <h2><%= name -%></h2>
+  <div class="gauge-wrapper">
+
+      <div class="range">
+        <div class="range-lower" style="--degrees: <%= (smallest_hash_key(surveys)[1] * 18) - 90 - 5 %>deg;"></div> <!-- lowest.score -->
+        <div class="range-upper" style="--degrees: <%= (largest_hash_key(surveys)[1] * 18) - 90 + 5 %>deg;"></div> <!-- highest.score -->
+      </div>
+
+      <div class="cutout"></div>
+      <div class="range-background"></div>
+      <div class="center-dot"></div>
+
+      <% reverse_order_hash = Hash[surveys.to_a.reverse].to_hash %>
+      <% reverse_order_hash.each_with_index do |(date, score), index| %>
+        <div class="gauge-indicator survey_<%= index -%>" style="--degrees: <%= (score * 18) - 90 %>deg;"></div>
+      <% end -%>
+
+    <div class="circle"></div>
+  </div>
+  <div class="text-circle">
+    <%= (reverse_order_hash.first[1] * 10).round %><sup>%</sup>
+  </div>
+  <div>
+    <%= pp surveys -%>
+  </div>
+</div>
