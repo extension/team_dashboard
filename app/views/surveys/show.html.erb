@@ -1,36 +1,85 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= link_to @survey.team.name, @survey.team %></h1>
-<h2><%= @survey.name %></h2>
 <p><%= link_to "view all surveys", @survey.team %></p>
-<table>
+<h1><%= @survey.name %></h1>
 
-  <thead>
+
+
+<div class="responses-scores">
+  <div>
+    <h2>Submissions</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="empty"></th>
+          <th class="table-header" colspan="5">Individual Average Score (Questions)</th>
+        </tr>
+        <tr>
+          <th>Submission</th>
+          <th>Psychological Safety (1-3)</th>
+          <th>Dependability (4-6)</th>
+          <th>Structure Clarity (7-9)</th>
+          <th>Meaning (10-12)</th>
+          <th>Impact (13-15)</th>
+          </tr>
+      </thead>
+
+    <% @survey.submissions.each do |submission| %>
+      <tr>
+        <td><%= link_to submission.submitted_date, submission %></td>
+        <td><%= submission.individual_psychological_safety_avg_score.round(2) %></td>
+        <td><%= submission.individual_dependability_avg_score.round(2) %></td>
+        <td><%= submission.individual_structure_clarity_avg_score.round(2) %></td>
+        <td><%= submission.individual_meaning_avg_score.round(2) %></td>
+        <td><%= submission.individual_impact_avg_score.round(2) %></td>
+      </tr>
+    <% end %>
+    </table>
+
+  </div>
+  <div>
+    <h2>Aggregated Averages</h2>
+    <table class="scores">
     <tr>
-      <th class="empty"></th>
-      <th class="table-header" colspan="5">Individual Average Score (Questions)</th>
+      <td>Psychological Safety (1-3)</td>
+      <td><strong><%= @survey.aggregate_psychological_safety_avg_score.round(2) %></strong></td>
     </tr>
     <tr>
-      <th>Submission</th>
-      <th>Psychological Safety (1-3)</th>
-      <th>Dependability (4-6)</th>
-      <th>Structure Clarity (7-9)</th>
-      <th>Meaning (10-12)</th>
-      <th>Impact (13-15)</th>
-      </tr>
-  </thead>
+      <td>Dependability (4-6)</td>
+      <td><strong><%= @survey.aggregate_dependability_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Structure Clarity (7-9)</td>
+      <td><strong><%= @survey.aggregate_structure_clarity_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Meaning (10-12)</td>
+      <td><strong><%= @survey.aggregate_meaning_avg_score.round(2) %></strong></td>
+    </tr>
+    <tr>
+      <td>Impact (13-15)</td>
+      <td><strong><%= @survey.aggregate_impact_avg_score.round(2) %></strong></td>
+    </tr>
+    </table>
+  </div>
+</div>
 
-<% @survey.submissions.each do |submission| %>
-  <tr>
-    <td><%= link_to submission.submitted_date, submission %></td>
-    <td><%= submission.individual_psychological_safety_avg_score.round(2) %></td>
-    <td><%= submission.individual_dependability_avg_score.round(2) %></td>
-    <td><%= submission.individual_structure_clarity_avg_score.round(2) %></td>
-    <td><%= submission.individual_meaning_avg_score.round(2) %></td>
-    <td><%= submission.individual_impact_avg_score.round(2) %></td>
-  </tr>
-<% end %>
-</table>
+<h1>Average Submission Score Plus Range</h1>
+
+<div class="dashboard-dials">
+<%= render partial: "submissions_dial", locals: {name: "Psychological Safety", submissions: @psychological_safety_surveys} -%>
+<%= render partial: "submissions_dial", locals: {name: "Dependability", submissions: @dependability_surveys} -%>
+<%= render partial: "submissions_dial", locals: {name: "Structure Clarity", submissions: @structure_clarity_surveys} -%>
+<%= render partial: "submissions_dial", locals: {name: "Meaning", submissions: @meaning_surveys} -%>
+<%= render partial: "submissions_dial", locals: {name: "Impact", submissions: @impact_surveys} -%>
+</div>
+
+
+
+
+
 
 <p>
 <%= link_to 'Edit', edit_survey_path(@survey) %> |

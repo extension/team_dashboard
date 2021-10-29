@@ -22,7 +22,7 @@
   </thead>
 <% @team.surveys.each do |survey| %>
   <tr>
-    <td><%= link_to survey.name, survey %></td>
+    <td><strong><%= link_to survey.name, survey %></strong></td>
     <td><%= survey.submissions.count %></td>
     <td><%= survey.aggregate_psychological_safety_avg_score.round(2) -%></td>
     <td><%= survey.aggregate_dependability_avg_score.round(2) -%></td>
@@ -33,6 +33,15 @@
 <% end %>
 </table>
 
+<h1>Average Survey Scores</h1>
+
+<div class="legend-wrapper">
+  <% reverse_order_hash = Hash[@psychological_safety_surveys.to_a.reverse].to_hash %>
+  <% @psychological_safety_surveys.each_with_index do |(survey_name, score), index| %>
+    <p class="legend survey_<%= (@psychological_safety_surveys.length - index - 1).abs -%>"><span></span> <%= survey_name -%></p>
+  <% end -%>
+</div>
+
 <div class="dashboard-dials">
 <%= render partial: "dashboard_dial", locals: {name: "Psychological Safety", surveys: @psychological_safety_surveys} -%>
 <%= render partial: "dashboard_dial", locals: {name: "Dependability", surveys: @dependability_surveys} -%>
@@ -40,8 +49,6 @@
 <%= render partial: "dashboard_dial", locals: {name: "Meaning", surveys: @meaning_surveys} -%>
 <%= render partial: "dashboard_dial", locals: {name: "Impact", surveys: @impact_surveys} -%>
 </div>
-
-
 
 <p>
 <%= link_to 'Edit', edit_team_path(@team) %> |
