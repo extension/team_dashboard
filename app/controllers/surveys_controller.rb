@@ -8,6 +8,32 @@ class SurveysController < ApplicationController
 
   # GET /surveys/1 or /surveys/1.json
   def show
+
+    @psychological_safety_surveys = Hash.new
+    @survey.submissions.each do |submission|
+      @psychological_safety_surveys[submission.id] = submission.individual_psychological_safety_avg_score.to_d.round(2)
+    end
+
+    @dependability_surveys = Hash.new
+    @survey.submissions.each do |submission|
+      @dependability_surveys[submission.id] = submission.individual_dependability_avg_score.to_d.round(2)
+    end
+
+    @structure_clarity_surveys = Hash.new
+    @survey.submissions.each do |submission|
+      @structure_clarity_surveys[submission.id] = submission.individual_structure_clarity_avg_score.to_d.round(2)
+    end
+
+    @meaning_surveys = Hash.new
+    @survey.submissions.each do |submission|
+      @meaning_surveys[submission.id] = submission.individual_meaning_avg_score.to_d.round(2)
+    end
+
+    @impact_surveys = Hash.new
+    @survey.submissions.each do |submission|
+      @impact_surveys[submission.id] = submission.individual_impact_avg_score.to_d.round(2)
+    end
+
   end
 
   # GET /surveys/new
