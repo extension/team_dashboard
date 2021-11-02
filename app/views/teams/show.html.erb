@@ -43,11 +43,11 @@
 </div>
 
 <div class="dashboard-dials">
-<%= render partial: "dashboard_dial", locals: {name: "Psychological Safety", surveys: @psychological_safety_surveys} -%>
-<%= render partial: "dashboard_dial", locals: {name: "Dependability", surveys: @dependability_surveys} -%>
-<%= render partial: "dashboard_dial", locals: {name: "Structure Clarity", surveys: @structure_clarity_surveys} -%>
-<%= render partial: "dashboard_dial", locals: {name: "Meaning", surveys: @meaning_surveys} -%>
-<%= render partial: "dashboard_dial", locals: {name: "Impact", surveys: @impact_surveys} -%>
+<%= render partial: "survey_dial", locals: {name: "Psychological Safety", surveys: @psychological_safety_surveys} -%>
+<%= render partial: "survey_dial", locals: {name: "Dependability", surveys: @dependability_surveys} -%>
+<%= render partial: "survey_dial", locals: {name: "Structure Clarity", surveys: @structure_clarity_surveys} -%>
+<%= render partial: "survey_dial", locals: {name: "Meaning", surveys: @meaning_surveys} -%>
+<%= render partial: "survey_dial", locals: {name: "Impact", surveys: @impact_surveys} -%>
 </div>
 
 <p>
