@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :submissions
   resources :surveys
   resources :teams
-  root to: "responses#index"
+  root to: "home#index"
 end
