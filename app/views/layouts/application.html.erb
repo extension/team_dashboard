@@ -8,13 +8,21 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= link_to "Teams", teams_path %>
-    <%= link_to "Responses", responses_path %>
-    <%= link_to "Submissions", submissions_path %>
-    <%= link_to "Surveys", surveys_path %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
+
+    <ul class="nav">
+      <li><%= link_to "Teams", teams_path %></li>
+      <li><%= link_to "Responses", responses_path %></li>
+      <li><%= link_to "Submissions", submissions_path %></li>
+      <li><%= link_to "Surveys", surveys_path %></li>
+    </ul>
+
     <%= yield %>
   </body>
 </html>

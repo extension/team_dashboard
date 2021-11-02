@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+
+.nav {display: flex; background: #eee; list-style-type:none; padding: 0;}
+.nav li {font-family: 'Lato', sans-serif;}
+.nav li a {padding: .5em .75em; text-decoration: none; display: block; font-size: 1.4em;}
