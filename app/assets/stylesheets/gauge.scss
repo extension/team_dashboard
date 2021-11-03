@@ -23,6 +23,7 @@ body {
   margin-top: 0;
 }
 .dashboard-item h3 {
+  text-align: center;
   font-size: 1.1em;
   line-height: 1.3em;
   z-index: 900;
@@ -232,7 +233,7 @@ sup {
   margin-top: -5px;
   margin-left: 5px;
 }
-.total-score {border: 2px solid #bbb; width: 240px; padding: 0 1em 2em;
+.total-score {border: 2px solid #bbb; width: 240px; padding: 1em 1em 2em;
   // float:right;
 }
 .total-score h2 {text-align: center;}

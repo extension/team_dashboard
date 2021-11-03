@@ -70,7 +70,10 @@
 </table>
   </div>
   <div>
-      <div class="total-score"><%= render partial: "survey_dial", locals: {name: "Survey Average Score", surveys: @total_surveys} -%></div>
+      <div class="dashboard-item total-score">
+        <%= render partial: "survey_dial", locals: {name: "Total Team Score", surveys: @total_surveys} -%>
+        <h3>Average of all submissions per survey.</h3>
+      </div>
   </div>
 </div>
 <p>
