@@ -20,12 +20,12 @@ table caption {
 table tr {
   // background-color: #f8f8f8;
   border: 1px solid #ddd;
-  padding: .35em;
+  // padding: .35em;
 }
 
 table th,
 table td {
-  padding: .75em 1.625em;
+  // padding: .75em 1.625em;
   // text-align: center;
 }
 
@@ -55,3 +55,16 @@ table th {
 .responses-scores {display: flex; gap: 20px;}
 .scores {background: #e2fbff;}
 .scores td {background: #e2fbff; font-size: 1.2em !important;}
+
+
+
+// .average_scores {border-spacing: 0;}
+.average_scores th {padding: .5em 1.5em;}
+.average_scores td {padding: 0; margin: 0; }
+.average_scores td span {background: #eee; display: inline-block; padding: 10px; width: 60px; text-align: center; background: #CAFDFE;}
+.average_scores {
+  // border-collapse: collapse;
+}
+
+.avg_score {text-align: center; }
+.large {font-size: 1.2em;}

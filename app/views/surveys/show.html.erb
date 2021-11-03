@@ -6,7 +6,7 @@
 
 
 
-<div class="responses-scores">
+<div class="responses-scores average_scores">
   <div>
     <h2>Submissions</h2>
 
@@ -29,40 +29,23 @@
     <% @survey.submissions.each do |submission| %>
       <tr>
         <td><%= link_to submission.submitted_date, submission %></td>
-        <td><%= submission.individual_psychological_safety_avg_score.round(2) %></td>
-        <td><%= submission.individual_dependability_avg_score.round(2) %></td>
-        <td><%= submission.individual_structure_clarity_avg_score.round(2) %></td>
-        <td><%= submission.individual_meaning_avg_score.round(2) %></td>
-        <td><%= submission.individual_impact_avg_score.round(2) %></td>
+        <td class="avg_score"><span><%= submission.individual_psychological_safety_avg_score.round(2) %></span></td>
+        <td class="avg_score"><span><%= submission.individual_dependability_avg_score.round(2) %></span></td>
+        <td class="avg_score"><span><%= submission.individual_structure_clarity_avg_score.round(2) %></span></td>
+        <td class="avg_score"><span><%= submission.individual_meaning_avg_score.round(2) %></span></td>
+        <td class="avg_score"><span><%= submission.individual_impact_avg_score.round(2) %></span></td>
       </tr>
     <% end %>
+    <tr>
+      <td><strong>Aggregated Averages</strong></td>
+      <td class="avg_score large"><span><strong><%= @survey.aggregate_psychological_safety_avg_score.round(2) %></strong></span></td>
+      <td class="avg_score large"><span><strong><%= @survey.aggregate_dependability_avg_score.round(2) %></strong></span></td>
+      <td class="avg_score large"><span><strong><%= @survey.aggregate_structure_clarity_avg_score.round(2) %></strong></span></td>
+      <td class="avg_score large"><span><strong><%= @survey.aggregate_meaning_avg_score.round(2) %></strong></span></td>
+      <td class="avg_score large"><span><strong><%= @survey.aggregate_impact_avg_score.round(2) %></strong></span></td>
+    </tr>
     </table>
 
-  </div>
-  <div>
-    <h2>Aggregated Averages</h2>
-    <table class="scores">
-    <tr>
-      <td>Psychological Safety (1-3)</td>
-      <td><strong><%= @survey.aggregate_psychological_safety_avg_score.round(2) %></strong></td>
-    </tr>
-    <tr>
-      <td>Dependability (4-6)</td>
-      <td><strong><%= @survey.aggregate_dependability_avg_score.round(2) %></strong></td>
-    </tr>
-    <tr>
-      <td>Structure Clarity (7-9)</td>
-      <td><strong><%= @survey.aggregate_structure_clarity_avg_score.round(2) %></strong></td>
-    </tr>
-    <tr>
-      <td>Meaning (10-12)</td>
-      <td><strong><%= @survey.aggregate_meaning_avg_score.round(2) %></strong></td>
-    </tr>
-    <tr>
-      <td>Impact (13-15)</td>
-      <td><strong><%= @survey.aggregate_impact_avg_score.round(2) %></strong></td>
-    </tr>
-    </table>
   </div>
 </div>
 

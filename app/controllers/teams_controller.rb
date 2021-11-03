@@ -36,6 +36,11 @@ class TeamsController < ApplicationController
       @impact_surveys[survey.name] = survey.aggregate_impact_avg_score.to_d.round(2)
     end
 
+    @total_surveys = Hash.new
+    @team.surveys.each do |survey|
+      @total_surveys[survey.name] = survey.aggregate_total_score.to_d.round(2)
+    end
+
   end
 
   # GET /teams/new

@@ -9,7 +9,7 @@ end
 %>
 
 
-<div class="dashboard-item">
+
   <h2><%= name -%></h2>
   <div class="gauge-wrapper">
 
@@ -33,6 +33,5 @@ end
     <%= (reverse_order_hash.first[1] * 10).round %><sup>%</sup>
   </div>
   <div>
-    <%= pp surveys -%>
+    <% pp surveys -%> <!-- hide hash for now -->
   </div>
-</div>
