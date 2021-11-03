@@ -9,6 +9,7 @@
   <% @psychological_safety_surveys.each_with_index do |(survey_name, score), index| %>
     <p class="legend survey_<%= (@psychological_safety_surveys.length - index - 1).abs -%>"><span></span> <%= survey_name -%></p>
   <% end -%>
+    <p class="legend survey_range"><span></span>Range of Responses</p>
 </div>
 
 <div class="dashboard-dials">
@@ -21,7 +22,7 @@
     <h3>Team members get things done on time and meet Google's high bar for excellence.</h3>
   </div>
   <div class="dashboard-item">
-    <%= render partial: "survey_dial", locals: {name: "Structure Clarity", surveys: @structure_clarity_surveys} -%>
+    <%= render partial: "survey_dial", locals: {name: "Structure & Clarity", surveys: @structure_clarity_surveys} -%>
     <h3>Team members have clear roles, plans and goals.</h3>
   </div>
   <div class="dashboard-item">
@@ -72,7 +73,8 @@
   <div>
       <div class="dashboard-item total-score">
         <%= render partial: "survey_dial", locals: {name: "Total Team Score", surveys: @total_surveys} -%>
-        <h3>Average of all submissions per survey.</h3>
+        <h3>“The whole is greater than the sum of its parts.” -Aristotle</h3>
+        <p>(Average of all submissions per survey.)</p>
       </div>
   </div>
 </div>
