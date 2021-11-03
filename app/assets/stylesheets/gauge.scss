@@ -33,6 +33,18 @@ body {
   margin-bottom: 0;
 }
 
+.dashboard-item p {
+  text-align: center;
+  // font-size: 1.1em;
+  // line-height: 1.3em;
+  font-family: 'Lato', sans-serif;
+  z-index: 900;
+  position: relative;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 0;
+}
+
 .gauge-wrapper {
   position: relative;
   margin-left: auto;
@@ -173,6 +185,9 @@ body {
 .survey_3 span {
   background: magenta;
   opacity: .7;
+}
+.survey_range span {
+  background: #BBFEFE;
 }
 
 .circle {
