@@ -12,17 +12,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap" rel="stylesheet">
+    <style>
+        .flash__alert   { color: red; }
+        .flash__notice  { color: blue; }
+        .flash__success { color: green; }
+    </style>
   </head>
 
   <body>
-
     <ul class="nav">
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "Teams", teams_path %></li>
-      <li><%= link_to "Responses", responses_path %></li>
-      <li><%= link_to "Submissions", submissions_path %></li>
-      <li><%= link_to "Surveys", surveys_path %></li>
+      <% if current_user %>
+        <li><%= link_to "Responses", responses_path %></li>
+        <li><%= link_to "Submissions", submissions_path %></li>
+        <li><%= link_to "Surveys", surveys_path %></li>
+        <%= link_to "Sign Out", destroy_user_session_path %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path %>
+      <% end %>
     </ul>
+    <% if flash.any? %>
+      <% flash.each do |key, value| -%>
+        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+      <% end -%>
+    <% end %>
 
     <%= yield %>
   </body>
