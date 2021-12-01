@@ -22,20 +22,7 @@
         <td><%= response.time_entered %></td>
         <td><%= response.question_number %></td>
         <td><%= response.submission_id %></td>
-        <td><%= link_to 'Show', response %></td>
-        <td><%= link_to 'Edit', edit_response_path(response) %></td>
-        <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Response', new_response_path %>
-
-<h4>Import csv data</h4>
-<%= form_tag import_responses_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import CSV" %>
-<% end %>
