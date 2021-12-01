@@ -22,14 +22,13 @@
   <body>
     <ul class="nav">
       <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "Teams", teams_path %></li>
       <% if current_user %>
+        <li><%= link_to "Teams", teams_path %></li>
         <li><%= link_to "Responses", responses_path %></li>
         <li><%= link_to "Submissions", submissions_path %></li>
         <li><%= link_to "Surveys", surveys_path %></li>
-        <%= link_to "Sign Out", destroy_user_session_path %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path %>
+        <li><%= link_to "Upload", upload_path %></li>
+        <li class="auth"><%= link_to "Sign Out", destroy_user_session_path %></li>
       <% end %>
     </ul>
     <% if flash.any? %>
