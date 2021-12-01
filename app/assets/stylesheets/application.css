@@ -23,3 +23,20 @@ body {
 .nav {display: flex; background: #eee; list-style-type:none; padding: 0;}
 .nav li {font-family: 'Lato', sans-serif;}
 .nav li a {padding: .5em .75em; text-decoration: none; display: block; font-size: 1.4em;}
+.nav li.auth {justify-content: flex-end; background:#ccc;  margin-left: auto;}
+
+
+.button {
+  background-color: #1a73e8;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.select-file input {background: #ddd; padding: 1em; font-size: 1.2em;}
+
+.flash {padding: 1em; background: #FBFF99; margin-bottom: 1em; color: #000 !important; font-size: 1.2em;}

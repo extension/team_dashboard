@@ -1,0 +1,5 @@
+<h1>Import CSV Data</h1>
+<%= form_tag import_responses_path, multipart: true do %>
+  <p class="select-file"><%= file_field_tag :file %></p>
+  <p><%= submit_tag "Import CSV", class: "button" %></p>
+<% end %>
