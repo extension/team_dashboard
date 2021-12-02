@@ -1,14 +1,20 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   # GET /surveys or /surveys.json
   def index
+    if !current_user
+      redirect_to root_path
+    end
     @surveys = Survey.all
   end
 
   # GET /surveys/1 or /surveys/1.json
   def show
+    if @survey.team.slug != params[:team_id]
+      redirect_to root_path
+    end
 
     @psychological_safety_surveys = Hash.new
     @survey.submissions.each do |submission|

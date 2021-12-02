@@ -3,7 +3,8 @@
 
 <h1><%= link_to @submission.survey.team.name, @submission.survey.team %></h1>
 <h2><%= @submission.survey.name %></h2>
-<p><%= link_to "view all submissions", @submission.survey %></p>
+<p><%= link_to "view all submissions", team_survey_path(@submission.survey.team, @submission.survey) %></p>
+
 <h1>Submission <%= @submission.submitted_date %></h1>
 
 <div class="responses-scores">
@@ -58,5 +59,3 @@
 
 
 </div>
-<%= link_to 'Edit', edit_submission_path(@submission) %> |
-<%= link_to 'Back', submissions_path %>

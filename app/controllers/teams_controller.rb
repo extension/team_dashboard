@@ -3,6 +3,9 @@ class TeamsController < ApplicationController
 
   # GET /teams or /teams.json
   def index
+    if !current_user
+      redirect_to root_path
+    end
     @teams = Team.all
   end
 

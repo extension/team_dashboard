@@ -1,14 +1,19 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
 
   # GET /submissions or /submissions.json
   def index
+    if !current_user
+      redirect_to root_path
+    end
     @submissions = Submission.all
   end
 
   # GET /submissions/1 or /submissions/1.json
   def show
+    if @submission.survey.team.slug != params[:team_id]
+      redirect_to root_path
+    end
   end
 
   # GET /submissions/new
