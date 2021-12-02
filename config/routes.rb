@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   end
   resources :submissions
   resources :surveys
-  resources :teams
+  resources :teams do
+    resources :surveys do
+      resources :submissions
+    end
+  end
   get 'upload', to: 'home#upload'
   root to: "home#index"
 end

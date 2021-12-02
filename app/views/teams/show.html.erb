@@ -58,11 +58,7 @@
   </thead>
 <% @team.surveys.each_with_index do |(survey), index| %>
   <tr>
-    <% if current_user %>
-    <td><strong><%= link_to survey.name, survey %></strong></td>
-    <% else %>
-    <td><strong><%= survey.name %></strong></td>
-    <% end %>
+    <td><strong><%= link_to survey.name, team_survey_path(survey.team, survey) %></strong></td>
     <td class="avg_score"><%= survey.submissions.count %></td>
     <td class="avg_score"><span><%= survey.aggregate_psychological_safety_avg_score.round(2) -%></span></td>
     <td class="avg_score"><span><%= survey.aggregate_dependability_avg_score.round(2) -%></span></td>
