@@ -14,8 +14,8 @@ end
   <div class="gauge-wrapper">
 
       <div class="range">
-        <div class="range-lower" style="--degrees: <%= (smallest_hash_key(surveys)[1] * 18) - 90 - 5 %>deg;"></div> <!-- lowest.score -->
-        <div class="range-upper" style="--degrees: <%= (largest_hash_key(surveys)[1] * 18) - 90 + 5 %>deg;"></div> <!-- highest.score -->
+        <div class="range-lower" style="--degrees: <%= (smallest_hash_key(surveys)[1] * 18) - 90 %>deg;"></div> <!-- lowest.score -->
+        <div class="range-upper" style="--degrees: <%= (largest_hash_key(surveys)[1] * 18) - 90 %>deg;"></div> <!-- highest.score -->
       </div>
 
       <div class="cutout"></div>
