@@ -9,7 +9,9 @@
   <% @psychological_safety_surveys.each_with_index do |(survey_name, score), index| %>
     <p class="legend survey_<%= (@psychological_safety_surveys.length - index - 1).abs -%>"><span></span> <%= survey_name -%></p>
   <% end -%>
+  <% if @psychological_safety_surveys.length > 1%>
     <p class="legend survey_range"><span></span>Range of Responses</p>
+  <% end -%>
 </div>
 
 <div class="dashboard-dials">
