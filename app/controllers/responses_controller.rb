@@ -1,6 +1,7 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:get_google_form_submission]
+  skip_before_action :verify_authenticity_token, only:[:get_google_form_submission]
 
   # GET /responses or /responses.json
   def index
@@ -58,9 +59,19 @@ class ResponsesController < ApplicationController
   end
 
   #import data from csv
-  def import
-    Response.import(params[:file])
-    redirect_to root_url, notice: "Successfully imported data"
+  # def import
+  #   Response.import(params[:file])
+  #   redirect_to root_url, notice: "Successfully imported data"
+  # end
+
+  def get_google_form_submission
+    #we don't care about the questions, so just get the responses
+    data = params.values
+    email = data[0]
+    survey = data[1]
+    team = data[2]
+    responses = data[3..17]
+    Response.get_google_form_submission(email, survey, team, responses)
   end
 
   private
