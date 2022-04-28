@@ -66,11 +66,19 @@ class ResponsesController < ApplicationController
 
   def get_google_form_submission
     #we don't care about the questions, so just get the responses
-    data = params.values
-    email = data[0]
-    survey = data[1]
-    team = data[2]
-    responses = data[3..17]
+    parameters = params.permit(params.keys).to_h
+    values = params.values
+    email = values[0]
+    survey = values[1]
+    team = values[2]
+
+    #create new hash with questions and responses excluding email, survey and team
+    #we need both the question and answer for the responses
+    responses = {}
+    Hash[Array(parameters)[3..17]].each_pair do |key, value|
+      responses.store(key, value)
+    end
+
     Response.get_google_form_submission(email, survey, team, responses)
   end
 
