@@ -75,7 +75,7 @@ class ResponsesController < ApplicationController
     #create new hash with questions and responses excluding email, survey and team
     #we need both the question and answer for the responses
     responses = {}
-    Hash[Array(parameters)[3..18]].each_pair do |key, value|
+    Hash[Array(parameters)[3..17]].each_pair do |key, value|
       responses.store(key, value)
     end
 
