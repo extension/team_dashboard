@@ -59,10 +59,10 @@ class ResponsesController < ApplicationController
   end
 
   #import data from csv
-  # def import
-  #   Response.import(params[:file])
-  #   redirect_to root_url, notice: "Successfully imported data"
-  # end
+  def import
+    Response.import(params[:file])
+    redirect_to root_url, notice: "Successfully imported data"
+  end
 
   def get_google_form_submission
     #we don't care about the questions, so just get the responses

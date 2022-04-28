@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get 'users/sign_out', to: 'users/sessions#destroy', as: :destroy_user_session
   end
   resources :responses do
-    # collection { post :import}
+    collection { post :import}
     collection { post :get_google_form_submission}
   end
   resources :submissions
