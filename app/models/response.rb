@@ -33,8 +33,11 @@ class Response < ApplicationRecord
     #create survey
     survey = Survey.create(name: survey, team: team)
 
+    #create user
+    user = User.create(email: email)
+
     #create submission
-    submission = Submission.create(survey: survey)
+    submission = Submission.create(survey: survey, user: user)
 
     responses.each_with_index do |r, index|
       Response.create(submission: submission,

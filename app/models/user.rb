@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :submissions
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   def self.from_google(email:, full_name:, uid:, avatar_url:)
