@@ -57,6 +57,7 @@ group :development do
   gem 'spring'
   gem "database_cleaner"
   gem "rspec-rails"
+  gem "letter_opener"
 end
 
 group :test do

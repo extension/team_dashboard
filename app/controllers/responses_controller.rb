@@ -70,9 +70,9 @@ class ResponsesController < ApplicationController
     if bearer_token == ENV['BEARER_TOKEN']
       #we don't care about the questions for email, survey and team so just get the responses
       values = params.values
-      email = values[0]
-      survey = values[1]
-      team = values[2]
+      @email = values[0]
+      @survey = values[1]
+      @team = values[2]
 
       #create new hash with questions and responses excluding email, survey and team
       #we need both the question and answer for the responses
@@ -82,7 +82,9 @@ class ResponsesController < ApplicationController
         responses.store(key, value)
       end
 
-      Response.get_google_form_submission(email, survey, team, responses)
+      Response.get_google_form_submission(@email, @survey, @team, responses)
+
+      ResponsesMailer.with(email: @email, survey: @survey, team: @team).new_response_email.deliver_later
     end
   end
 

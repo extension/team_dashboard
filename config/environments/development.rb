@@ -70,4 +70,9 @@ Rails.application.configure do
 
   #allow webhook testing with ngrok
   config.hosts << /[a-z0-9-]+\.ngrok\.io/
+
+  #configure letter_opener
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true 
 end
