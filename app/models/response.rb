@@ -34,7 +34,7 @@ class Response < ApplicationRecord
     survey = Survey.create(name: survey, team: team)
 
     #create user
-    user = User.create(email: email)
+    user = User.where(email: email).first_or_create
 
     #create submission
     submission = Submission.create(survey: survey, user: user)
@@ -46,6 +46,5 @@ class Response < ApplicationRecord
                       question_number: index +1
                       )
     end
-
   end
 end
