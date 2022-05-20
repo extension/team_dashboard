@@ -94,4 +94,19 @@ Rails.application.configure do
   #google auth credentials
   ENV['GOOGLE_OAUTH_CLIENT_ID'] = ENV['GOOGLE_OAUTH_CLIENT_ID']
   ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = ENV['GOOGLE_OAUTH_CLIENT_SECRET']
+
+  #email config
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'sleepy-plains-64070.herokuapp.com' }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => "extension.org",
+    :user_name            => ENV['GMAIL_USERNAME'],
+    :password             => ENV['GMAIL_PASSWORD'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 end

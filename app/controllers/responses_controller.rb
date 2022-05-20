@@ -84,7 +84,7 @@ class ResponsesController < ApplicationController
 
       Response.get_google_form_submission(@email, @survey, @team, responses)
 
-      ResponsesMailer.with(email: @email, survey: @survey, team: @team).new_response_email.deliver_later
+      ResponsesMailer.with(email: @email, survey: @survey, team: @team).new_response_email.deliver_now
     end
   end
 
