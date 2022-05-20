@@ -94,4 +94,20 @@ Rails.application.configure do
   #google auth credentials
   ENV['GOOGLE_OAUTH_CLIENT_ID'] = ENV['GOOGLE_OAUTH_CLIENT_ID']
   ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = ENV['GOOGLE_OAUTH_CLIENT_SECRET']
+
+  #email config
+  config.action_mailer.delivery_method = :smtp
+  host = 'extension.org' #replace with your own url
+  config.action_mailer.default_url_options = { host: host }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => "extension.org",
+    :user_name            => ENV['GMAIL_USERNAME'],
+    :password             => ENV['GMAIL_PASSWORD']>,
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 end
