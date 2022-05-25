@@ -26,7 +26,6 @@ class Response < ApplicationRecord
   end
 
   def self.get_google_form_submission(email, survey, team, responses)
-    # puts "responses from controller is: " + responses.inspect
     #create team
     team = Team.where(name: team).first_or_create
 
@@ -35,10 +34,10 @@ class Response < ApplicationRecord
 
     #create user
     user = User.where(email: email).first_or_create
-
     #create submission
     submission = Submission.create(survey: survey, user: user)
 
+    #create responses
     responses.each_with_index do |r, index|
       Response.create(submission: submission,
                       question: r[0],
