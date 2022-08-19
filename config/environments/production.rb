@@ -107,7 +107,7 @@ Rails.application.configure do
     :port                 => 587,
     :domain               => "extension.org",
     :user_name            => ENV['GMAIL_USERNAME'],
-    :password             => ENV['GMAIL_PASSWORD']>,
+    :password             => ENV['GMAIL_PASSWORD'],
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
