@@ -106,7 +106,7 @@ class TeamsController < ApplicationController
       Team.get_google_form_team_submission(@leader_name, @leader_email, @team_name, @number_of_team_members)
 
       # TODO: update this with a team mailer
-      TeamsMailer.with(email: @leader_email, team: @team_name).new_response_email.deliver_now
+      TeamMailer.with(email: @leader_email, team: @team_name).new_team_email.deliver_now
     else
       puts "bearer_token failed"
     end
