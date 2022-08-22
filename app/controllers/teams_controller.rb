@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, only:[:get_google_form_team_submission]
 
   # GET /teams or /teams.json
   def index
@@ -11,7 +12,6 @@ class TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
-
     # surveys_hash = {"Initial Baseline Survey"=>5.4, "Second Survey"=>7.8, "Third Survey"=>8.1, "Final Survey"=>8.7}
 
     @psychological_safety_surveys = Hash.new
@@ -92,6 +92,26 @@ class TeamsController < ApplicationController
     end
   end
 
+  def get_google_form_team_submission
+    bearer_token = request.headers['Authorization'].split(' ').last
+
+    if bearer_token == ENV['BEARER_TOKEN']
+      values = params.values
+      # puts "values are: " + values.inspect
+      @leader_name = values[0]
+      @leader_email = values[1]
+      @team_name = values[2]
+      @number_of_team_members = values[3]
+
+      Team.get_google_form_team_submission(@leader_name, @leader_email, @team_name, @number_of_team_members)
+
+      # TODO: update this with a team mailer
+      TeamsMailer.with(email: @leader_email, team: @team_name).new_response_email.deliver_now
+    else
+      puts "bearer_token failed"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -100,6 +120,6 @@ class TeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:leader_name, :leader_email, :name, :number_of_team_members)
     end
 end

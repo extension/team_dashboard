@@ -10,6 +10,11 @@ Rails.application.routes.draw do
     collection { post :import}
     collection { post :get_google_form_submission}
   end
+
+  resources :teams do
+    collection { post :get_google_form_team_submission}
+  end
+
   resources :submissions
   resources :surveys
   resources :teams do
