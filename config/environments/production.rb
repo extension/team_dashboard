@@ -98,8 +98,8 @@ Rails.application.configure do
   #email config
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.default_url_options = { host: 'sleepy-plains-64070.herokuapp.com' }
-  host = 'extension.org' #replace with your own url
-  config.action_mailer.default_url_options = { host: host }
+  # host = 'extension.org' #replace with your own url
+  # config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
