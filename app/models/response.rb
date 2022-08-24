@@ -28,7 +28,6 @@ class Response < ApplicationRecord
   def self.get_google_form_submission(email, survey, team, responses)
     #create team
     team = Team.where(name: team).first_or_create
-
     #create survey
     survey = Survey.create(name: survey, team: team)
 

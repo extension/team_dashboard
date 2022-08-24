@@ -4,10 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>Thank you for submitting your responses for <%= @survey_name %> for  <%= @team_name %>!</p>
-    #if THD is viewable
-      <p> You may view your THD here: </p>
-    #else
-      <p> Once your THD is ready we will send an email with a link to view </p>
-  </body>
+  <p>
+    Your responses for your <%= @survey_name %> for <b><%= @team_name %></b> have been received. A link to your results dashboard will be sent once the required number of responses has been submitted by your team members. NOTE: The initial survey requires a survey response from ALL team members. Subsequent survey results will be sent once 80% of team members have responded.
+  </p>
+  <p>
+    Thanks for your participation. Healthy teams have more impact!</br>
+    ExF Team Development
+  </p>
+
 </html>
