@@ -1,0 +1,15 @@
+#<Team id: nil, name: nil, created_at: nil, updated_at: nil, slug: nil, leader_name: nil, leader_email: nil, number_of_team_members: nil>
+
+test_team:
+  name: test_team
+  leader_email: mark@wintas.com
+  number_of_team_members: 4
+
+# overdue_team:
+#   name: wintas
+#   leader_email: bustas@wintas.com
+#   number_of_team_members: 22
+#   survey_status: "{ intial_survey_complete: false,
+#                     second_survey_complete: false,
+#                     third_survey_complete: false,
+#                     final_survey_complete: false }"

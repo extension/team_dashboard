@@ -1,0 +1,9 @@
+# <Survey id: nil, name: nil, team_id: nil, created_at: nil, updated_at: nil>
+
+survey_one:
+  name: "Initial Baseline Survey"
+  team: test_team
+
+# survey_two:
+#   name: "Initial Baseline Survey"
+#   team: overdue_team
