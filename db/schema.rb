@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_19_181334) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_175959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -90,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_181334) do
     t.string "leader_name"
     t.string "leader_email"
     t.integer "number_of_team_members"
+    t.text "survey_status"
     t.index ["slug"], name: "index_teams_on_slug", unique: true
   end
 
