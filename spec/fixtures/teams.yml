@@ -1,15 +1,13 @@
 #<Team id: nil, name: nil, created_at: nil, updated_at: nil, slug: nil, leader_name: nil, leader_email: nil, number_of_team_members: nil>
 
-test_team:
-  name: test_team
+#this team has a single survey
+team_one:
+  name: team_one
   leader_email: mark@wintas.com
-  number_of_team_members: 4
+  number_of_team_members: 10
 
-# overdue_team:
-#   name: wintas
-#   leader_email: bustas@wintas.com
-#   number_of_team_members: 22
-#   survey_status: "{ intial_survey_complete: false,
-#                     second_survey_complete: false,
-#                     third_survey_complete: false,
-#                     final_survey_complete: false }"
+#this team has multiple surveys
+team_two:
+  name: team_two
+  leader_email: bustas@wintas.com
+  number_of_team_members: 6

@@ -1,0 +1,21 @@
+ #<Submission id: nil, submitted_date: nil, survey_id: nil, created_at: nil, updated_at: nil, user_id: nil>
+
+submission_one:
+  user: user_one
+  survey: survey_one
+
+submission_two:
+  user: user_two
+  survey: survey_two
+
+submission_three:
+  user: user_three
+  survey: survey_three
+
+submission_four:
+  user: user_four
+  survey: survey_four
+
+submission_five:
+  user: user_five
+  survey: survey_five

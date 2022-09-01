@@ -1,0 +1,16 @@
+#<User id: nil, email: nil, full_name: nil, uid: nil, avatar_url: nil, authorized: false, created_at: nil, updated_at: nil>
+
+user_one:
+  email: "bustas1@wintas.com"
+
+user_two:
+  email: "bustas2@wintas.com"
+
+user_three:
+  email: "bustas3@wintas.com"
+
+user_four:
+  email: "bustas4@wintas.com"
+
+user_five:
+  email: "bustas5@wintas.com"
