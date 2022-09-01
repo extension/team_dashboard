@@ -35,7 +35,7 @@ class Team < ApplicationRecord
 			first_baseline_submission = team.surveys.where(name: "Initial Baseline Survey").pluck(:created_at).min
 			progress_in_days = (first_baseline_submission.to_date - DateTime.now.to_date).to_i
 			if progress_in_days < 91
-				intial_survey_notification(team, progress_in_days)
+				initial_survey_notification(team, progress_in_days)
 			elsif progress_in_days.between?(90, 180)&& deserialized_survey[:second_survey_complete].present?
 				second_survey_notification(team, progress_in_days)
 			elsif progress_in_days.between?(181, 270)&& deserialized_survey[:third_survey_complete].present?
@@ -49,14 +49,16 @@ class Team < ApplicationRecord
 	#the notifications below are based on the a predetermined threshold of surveys being submitted
 	#before an email is sent to the team
 
-	def self.intial_survey_notification(team, progress_in_days)
+	def self.initial_survey_notification(team, progress_in_days)
 		survey_count = team.surveys.where(name: "Initial Baseline Survey").count
-		if progress_in_days == 60
+		if progress_in_days == 60 && survey_count < team.number_of_team_members
 			#two months into this phase, send a nag message to team lead
-			
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).sixty_day_reminder.deliver_now
 		elsif survey_count >= team.number_of_team_members
 			#send survey threshold met notification
-			# team.survey_status[:intial_survey_complete] = true
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).initial_survey_threshold_met.deliver_now
+			end
 		end
 	end
 
