@@ -31,16 +31,15 @@ class Team < ApplicationRecord
 	def self.get_next_survey_notification
 		teams = Team.all
 		teams.each do |team|
-			deserialized_survey = team.serializable_hash(only: :survey_status)
 			first_baseline_submission = team.surveys.where(name: "Initial Baseline Survey").pluck(:created_at).min
 			progress_in_days = (first_baseline_submission.to_date - DateTime.now.to_date).to_i
-			if progress_in_days < 91
+			if progress_in_days < 91 && team.survey_status[:initial_survey_complete].nil?
 				initial_survey_notification(team, progress_in_days)
-			elsif progress_in_days.between?(90, 180)&& deserialized_survey[:second_survey_complete].present?
+			elsif progress_in_days.between?(90, 180) && team.survey_status[:second_survey_complete].nil?
 				second_survey_notification(team, progress_in_days)
-			elsif progress_in_days.between?(181, 270)&& deserialized_survey[:third_survey_complete].present?
+			elsif progress_in_days.between?(181, 270) && team.survey_status[:third_survey_complete].nil?
 				third_survey_notification(team. progress_in_days)
-			elsif progress_in_days.between?(271, 360)&& deserialized_survey[:final_survey_complete].present?
+			elsif progress_in_days.between?(271, 360) && team.survey_status[:final_survey_complete].nil?
 				final_survey_notification(team, progress_in_days)
 			end
 		end
@@ -52,13 +51,14 @@ class Team < ApplicationRecord
 	def self.initial_survey_notification(team, progress_in_days)
 		survey_count = team.surveys.where(name: "Initial Baseline Survey").count
 		if progress_in_days == 60 && survey_count < team.number_of_team_members
-			#two months into this phase, send a nag message to team lead
-			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).sixty_day_reminder.deliver_now
+			#two months into this phase and all team members have not submitted survey, send a nag message to team lead
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).initial_nag_email.deliver_now
 		elsif survey_count >= team.number_of_team_members
 			#send survey threshold met notification
 			team.get_team_member_emails.each do |email|
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).initial_survey_threshold_met.deliver_now
 			end
+			team.survey_status[:initial_survey_complete] = true
 		end
 	end
 
@@ -66,7 +66,7 @@ class Team < ApplicationRecord
 		survey_count = team.surveys.where(name: "Second Survey").count
 		if progress_in_days == 90
 			#send second survey notification
-			return "send 90 day email"
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).second_nag_email.deliver_now
 		elsif survey_count >= team.number_of_team_members * 0.8
 			#send survey threshold met notification
 			team.survey_status[:second_survey_complete] = true
@@ -79,8 +79,9 @@ class Team < ApplicationRecord
 
 	def third_survey_notification(team, progress_in_days)
 		survey_count = team.surveys.where(name: "Third Survey").count
-		if team.second_survey_threshold_met? && progress_in_days == 181
+		if team.second_survey_threshold_met? && progress_in_days == 180
 			#send third survey notification
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).third_nag_email.deliver_now
 		elsif survey_count >= team.number_of_team_members * 0.8
 			#send survey threshold met notification
 			team.survey_status[:third_survey_complete] = true
@@ -95,6 +96,7 @@ class Team < ApplicationRecord
 		survey_count = team.surveys.where(name: "Final Survey").count
 		if team.third_survey_threshold_met? && progress_in_days == 271
 			#send second survey notification
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).final_nag_email.deliver_now
 		elsif survey_count >= team.number_of_team_members * 0.8
 			#send survey threshold met notification
 			team.survey_status[:final_survey_complete] = true
