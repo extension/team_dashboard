@@ -36,15 +36,16 @@ RSpec.describe Team do
     end
 
     it "tests initial_survey_notification and all members have submitted surveys" do
-      #TODO this test cold be improved so it handles multiple emails being sent to team members
-      #not crazy about this test, but good 'nuf for now'
-      team = teams(:team_two)
-      mail = Team.initial_survey_notification(team, 60)
-      #this tests that the get_team_member_emails method returns emails as it should
-      expect(mail).to eq(["bustas2@wintas.com", "bustas3@wintas.com", "bustas4@wintas.com", "bustas5@wintas.com"])
       #directly test the mailer
+      team = teams(:team_one)
       mailer = TeamMailer.with(email: "bustas2@wintas.com", team: team.name, slug: team.slug).initial_survey_threshold_met.deliver_now
       expect(mailer.subject).to eq("Team Health Dashboard")
+    end
+
+    it "should set initial survey status to complete" do
+      team = teams(:team_two)
+      Team.initial_survey_notification(team, 60)
+      expect(team.survey_status[:initial_survey_complete]).to eq(true)
     end
   end
 end
