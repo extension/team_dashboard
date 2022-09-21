@@ -29,12 +29,6 @@ RSpec.describe Team do
   end
 
   describe "test initial_survey_notification" do
-    it "should set initial survey status to complete" do
-      team = teams(:team_two)
-      Team.initial_survey_notification(team, 60)
-      expect(team.survey_status[:initial_survey_complete]).to eq(true)
-    end
-
     it "tests initial_survey_notification two month nag message to team lead" do
       team = teams(:team_one)
       mail = Team.initial_survey_notification(team, 60)
@@ -54,13 +48,20 @@ RSpec.describe Team do
   end
 
   describe "test second_survey_notification" do
+    it "tests second_survey_notification email sent" do
+      team = teams(:team_one)
+      result = Team.second_survey_notification(team, 90)
+      expect(result).to include("bustas2@wintas.com")
+      expect(result).to include("bustas1@wintas.com")
+    end
+
     it "tests second_survey_notification two month nag message to team lead" do
       team = teams(:team_one)
-      mail = Team.second_survey_notification(team, 90)
+      mail = Team.second_survey_notification(team, 150)
       expect(mail.body).to include("At this time only")
     end
 
-    it "tests second_survey_notification where survey threshold is not met" do
+    it "tests second_survey_notification when survey threshold is not met" do
       team = teams(:team_one)
 
       #build 10 surveys since team_one has 10 members
@@ -84,9 +85,16 @@ RSpec.describe Team do
   end
 
   describe "test third_survey_notification" do
+    it "tests third_survey_notification email sent" do
+      team = teams(:team_one)
+      result = Team.third_survey_notification(team, 180)
+      # TODO: we need to test that third_survey_notification mail method is called
+      expect(result).to include("bustas1@wintas.com")
+    end
+
     it "tests third_survey_notification two month nag message to team lead" do
       team = teams(:team_one)
-      mail = Team.third_survey_notification(team, 180)
+      mail = Team.third_survey_notification(team, 241)
       expect(mail.body).to include("At this time only")
     end
 
@@ -114,9 +122,17 @@ RSpec.describe Team do
   end
 
   describe "test final_survey_notification" do
+    it "tests final_survey_notification email sent" do
+      team = teams(:team_one)
+      result = Team.final_survey_notification(team, 271)
+      # build_surveys(team, "Final Survey", 5)
+      # TODO: we need to test that third_survey_notification mail method is called
+      expect(result).to include("bustas1@wintas.com")
+    end
+
     it "tests final_survey_notification two month nag message to team lead" do
       team = teams(:team_one)
-      mail = Team.final_survey_notification(team, 271)
+      mail = Team.final_survey_notification(team, 331)
       expect(mail.body).to include("At this time only")
     end
 
@@ -124,8 +140,7 @@ RSpec.describe Team do
       team = teams(:team_one)
 
       #build 10 surveys since team_one has 10 members
-      build_surveys(team, "Final Survey", 7)
-
+      build_surveys(team, "Final Survey", 6)
       #TODO would really like to be testing the mailer here
       Team.final_survey_notification(team, 272)
       expect(team.survey_status[:final_survey_complete]).to eq nil

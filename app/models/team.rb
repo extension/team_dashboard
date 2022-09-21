@@ -53,8 +53,8 @@ class Team < ApplicationRecord
 		if progress_in_days == 60 && survey_count < team.number_of_team_members
 			#two months into this phase and all team members have not submitted survey, send a nag message to team lead
 			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).initial_survey_nag_email.deliver_now
-		elsif survey_count >= team.number_of_team_members
-			#send survey threshold met notification
+		elsif survey_count >= team.number_of_team_members && team.survey_status[:initial_survey_complete] == nil
+			#send survey threshold met notification and set survey status
 			team.get_team_member_emails.each do |email|
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).initial_survey_threshold_met.deliver_now
 			end
@@ -64,46 +64,56 @@ class Team < ApplicationRecord
 
 	def self.second_survey_notification(team, progress_in_days)
 		survey_count = team.surveys.where(name: "Second Survey").count
-		if progress_in_days == 90  && survey_count < team.number_of_team_members
-			#two months into this phase and all team members have not submitted survey, send a nag message to team lead
-			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).second_survey_nag_email.deliver_now
-		elsif survey_count >= team.number_of_team_members * 0.8
-			#send survey threshold met notification
+		if progress_in_days == 90
+			#send 2nd survey notification to all team members
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).second_survey_email.deliver_now
+			end
+		elsif survey_count >= team.number_of_team_members * 0.8 && team.survey_status[:second_survey_complete] == nil
+			#send survey threshold met notification and set survey status
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).second_survey_threshold_met.deliver_now
+			end
 			team.survey_status[:second_survey_complete] = true
-		elsif progress_in_days == 150
-			#two months into this phase, send a nag message to team lead
-		else
-			#this means the previous survey threshold was never met; send reminder to team lead
+		elsif progress_in_days == 150 && team.survey_status[:second_survey_complete] == nil
+			#two months into this phase and survey threshold not met, send a nag message to team lead
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).second_survey_nag_email.deliver_now
 		end
 	end
 
 	def self.third_survey_notification(team, progress_in_days)
 		survey_count = team.surveys.where(name: "Third Survey").count
-		if progress_in_days == 180  && survey_count < team.number_of_team_members
-			#two months into this phase and all team members have not submitted survey, send a nag message to team lead
-			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).third_survey_nag_email.deliver_now
-		elsif survey_count >= team.number_of_team_members * 0.8
-			#send survey threshold met notification
+		if progress_in_days == 180 
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).third_survey_email.deliver_now
+			end
+		elsif survey_count >= team.number_of_team_members * 0.8 && team.survey_status[:third_survey_complete] == nil
+			#send survey threshold met notification and set survey status
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).third_survey_threshold_met.deliver_now
+			end
 			team.survey_status[:third_survey_complete] = true
-		elsif progress_in_days == 241
+		elsif progress_in_days == 241 && team.survey_status[:third_survey_complete] == nil
 			#two months into this phase, send a nag message to team lead
-		else
-			#this means the previous survey threshold was never met; send reminder to team lead
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).third_survey_nag_email.deliver_now
 		end
 	end
 
 	def self.final_survey_notification(team, progress_in_days)
 		survey_count = team.surveys.where(name: "Final Survey").count
-		if progress_in_days == 271 && survey_count < team.number_of_team_members
-			#two months into this phase and all team members have not submitted survey, send a nag message to team lead
-			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).final_survey_nag_email.deliver_now
-		elsif survey_count >= team.number_of_team_members * 0.8
-			#send survey threshold met notification
+		if progress_in_days == 271
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).final_survey_email.deliver_now
+			end
+		elsif survey_count >= team.number_of_team_members * 0.8 && team.survey_status[:final_survey_complete] == nil
+			#send survey threshold met notification and set survey status
+			team.get_team_member_emails.each do |email|
+				TeamMailer.with(email: email, team: team.name, slug: team.slug).final_survey_threshold_met.deliver_now
+			end
 			team.survey_status[:final_survey_complete] = true
-		elsif progress_in_days == 331
+		elsif progress_in_days == 331 && team.survey_status[:final_survey_complete] == nil
 			#two months into this phase, send a nag message to team lead
-		else
-			#this means the previous survey threshold was never met; send final email to team lead
+			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).final_survey_nag_email.deliver_now
 		end
 	end
 

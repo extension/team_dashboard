@@ -6,7 +6,7 @@ survey_one:
 
 survey_two:
   name: "Initial Baseline Survey"
-  team: team_two
+  team: team_one
 
 survey_three:
   name: "Initial Baseline Survey"
@@ -17,7 +17,7 @@ survey_four:
   team: team_two
 
 survey_five:
-  name: "Initial Baseline Survey"
+  name: "Final Survey"
   team: team_two
 
 survey_six:
@@ -25,5 +25,9 @@ survey_six:
   team: team_two
 
 survey_seven:
-  name: "Initial Baseline Survey"
+  name: "Final Survey"
+  team: team_one
+
+survey_eight:
+  name: "Final Survey"
   team: team_two
