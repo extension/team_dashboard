@@ -100,6 +100,9 @@ Rails.application.configure do
   # config.action_mailer.default_url_options = { host: 'sleepy-plains-64070.herokuapp.com' }
   # host = 'extension.org' #replace with your own url
   # config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_options = {
+      from: 'noreply@extension.org'
+  }
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
