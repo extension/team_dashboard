@@ -27,7 +27,9 @@ class Team < ApplicationRecord
 		return member_emails
 	end
 
-	#this method used to send subsequent (2nd, 3rd, final) email notifications to group
+	#this method will be run nightly and will send subsequent (2nd, 3rd, final) email 
+	#notifications all teams. Note their is no initial notification for teams. That
+	#notifcation will come from the team leader who creates the team
 	def self.get_next_survey_notification
 		teams = Team.all
 		teams.each do |team|
