@@ -34,7 +34,7 @@ class Team < ApplicationRecord
 		teams = Team.all
 		teams.each do |team|
 			first_baseline_submission = team.surveys.where(name: "Initial Baseline Survey").pluck(:created_at).min
-			progress_in_days = (first_baseline_submission.to_date - DateTime.now.to_date).to_i
+			progress_in_days = (DateTime.now.to_date - first_baseline_submission.to_date).to_i
 			if progress_in_days < 91 && team.survey_status[:initial_survey_complete].nil?
 				initial_survey_notification(team, progress_in_days)
 			elsif progress_in_days.between?(90, 180) && team.survey_status[:second_survey_complete].nil?
@@ -61,6 +61,7 @@ class Team < ApplicationRecord
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).initial_survey_threshold_met.deliver_now
 			end
 			team.survey_status[:initial_survey_complete] = true
+			team.save
 		end
 	end
 
@@ -77,6 +78,7 @@ class Team < ApplicationRecord
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).second_survey_threshold_met.deliver_now
 			end
 			team.survey_status[:second_survey_complete] = true
+			team.save
 		elsif progress_in_days == 150 && team.survey_status[:second_survey_complete] == nil
 			#two months into this phase and survey threshold not met, send a nag message to team lead
 			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).second_survey_nag_email.deliver_now
@@ -95,6 +97,7 @@ class Team < ApplicationRecord
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).third_survey_threshold_met.deliver_now
 			end
 			team.survey_status[:third_survey_complete] = true
+			team.save
 		elsif progress_in_days == 241 && team.survey_status[:third_survey_complete] == nil
 			#two months into this phase, send a nag message to team lead
 			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).third_survey_nag_email.deliver_now
@@ -113,6 +116,7 @@ class Team < ApplicationRecord
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).final_survey_threshold_met.deliver_now
 			end
 			team.survey_status[:final_survey_complete] = true
+			team.save
 		elsif progress_in_days == 331 && team.survey_status[:final_survey_complete] == nil
 			#two months into this phase, send a nag message to team lead
 			TeamMailer.with(leader_name: team.leader_name, email: team.leader_email, team: team.name).final_survey_nag_email.deliver_now
