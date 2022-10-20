@@ -31,7 +31,7 @@ class Team < ApplicationRecord
 	#notifications all teams. Note their is no initial notification for teams. That
 	#notifcation will come from the team leader who creates the team
 	def self.get_next_survey_notification
-		teams = Team.all
+		teams = Team.where.associated(:surveys).distinct #only check teams that have at least one survey
 		teams.each do |team|
 			first_baseline_submission = team.surveys.where(name: "Initial Baseline Survey").pluck(:created_at).min
 			progress_in_days = (DateTime.now.to_date - first_baseline_submission.to_date).to_i
