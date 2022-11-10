@@ -5,13 +5,13 @@
   </head>
   <body>
     <p>
-      Congratulations! The required number of responses for the final survey have been submitted for your team <b><%= @blarg %></b>. Please click on the link below to access your team dashboard results.
+      Congratulations! The required number of responses for the Final Survey have been submitted for your team <b><%= @team_name %></b>. Please click on the link below to access your team dashboard results.
     </p>
     <p>
       The 3 links included in this email are:</br>
-      1 - Dashboard results = <%= link_to("root_url/#{@team_slug}", "root_url/#{@team_slug}") %></br>
+      1 - You can view your dashboard results <%= link_to("HERE", "#{root_url}/teams/#{@team_slug}" )%></br>
       2 - Contact us for additional consultation at <%= mail_to("leadership@extension.org") %> </br>
-      3 - Download the “Healthy Teams” publication
+      3 - Download the <%= link_to("Healthy Teams", "https://online.flippingbook.com/view/594865749/")%> publication
     </p>
 
     <p>

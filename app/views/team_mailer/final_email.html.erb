@@ -8,14 +8,16 @@
       Thanks for using the Team Health Dashboard! We hope it was helpful in bringing your team together to generate a more visible, measurable, local impact.
     </p>
     <p>
-      While your dashboard data will be archived, <%= link_to("your teams dashboard page", "root_url/#{@team_slug}")%>  will always be accessible for use in reports, publications, etc. should you like. We encourage you to continue using this tool for a consistent “temperature” check on the health of your team or recommend it to others.
+      While your dashboard data will be archived <%= link_to("HERE", "#{root_url}/teams/#{@team_slug}" )%>,it will always be accessible for use in reports, publications, etc. should you like. We encourage you to continue using this tool for a consistent “temperature” check on the health of your team or recommend it to others.
     </p>
     <p>
-      As a learning organization, we would love to have your thoughts on this tool. When you have a few moments, please consider completing our short survey. Thanks again for your participation, keep leading!
+      As a learning organization, we would love to have your thoughts on this tool. When you have a few moments, please consider <%= link_to("completing our short survey", "https://registry.extension.org/222822742213145") %>.
     </p>
     <p>
-    Thanks for your participation. Healthy teams have more impact!</br>
-    ExF Team Development
+      Thanks for your participation. Healthy teams have more impact!
+    </p>
+    <p>
+      <%= link_to("ExF Team Development", "https://extension.org/leadership/")%>
     </p>
   </body>
 </html>

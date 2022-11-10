@@ -5,15 +5,17 @@
   </head>
   <body>
     <p>
-       Hi <%= @leader_name%>! A couple of months ago you created the team <b><%= @team_name %> for the Team Health Survey tool.</b>. At this time only xx number of your team have completed their initial survey. To view your teams results in the dashboard you will need 100% of your team to submit their Initial Survey.
+       Hi <%= @leader_name %>! At this time only <%= @survey_count %> of <%= @total_team_members %> members of your team have completed their final survey. To view your teams results in the dashboard you will need 80% of your team to submit their Final Survey.
     </p>
     <p>
-    The survey can be completed here: xx. Please encourage those group members that have not yet completed the survey to do so.
+    The survey can be completed <%= link_to("HERE", "https://docs.google.com/forms/d/e/1FAIpQLSf_6h69LoEf89HhiHOZv8qagw5DkToHl49lxRmATGDOCuidJQ/viewform")%>. Please encourage those group members that have not yet completed the survey to do so.
     </p>
 
+   <p>
+      Thanks for your participation. Please contact us at <%= mail_to("leadership@extension.org") %> if you have questions. Healthy teams have more impact!
+    </p>
     <p>
-    Thanks for your participation. Healthy teams have more impact!</br>
-    ExF Team Development
+      <%= link_to("ExF Team Development", "https://extension.org/leadership/")%>
     </p>
   </body>
 </html>
