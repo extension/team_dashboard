@@ -97,7 +97,7 @@ Rails.application.configure do
 
   #email config
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'sleepy-plains-64070.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'teamhealth.extension.org' }
   # host = 'extension.org' #replace with your own url
   # config.action_mailer.default_url_options = { host: host }
   config.action_mailer.default_options = {
