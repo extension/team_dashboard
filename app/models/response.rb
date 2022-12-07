@@ -29,7 +29,7 @@ class Response < ApplicationRecord
     #create team
     team = Team.where(name: team).first_or_create
     #create survey
-    survey = Survey.create(name: survey, team: team)
+    survey = Survey.create(name: survey, team: team).first_or_create
 
     #create user
     user = User.where(email: email).first_or_create
