@@ -118,7 +118,7 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
     email: {
     email_prefix: '[PREFIX] ',
-    sender_address: %{"notifier" <marklocklear@extension.org>},
-    exception_recipients: %w{exceptions@example.com}
+    sender_address: %{"notifier" <notifier@extension.org>},
+    exception_recipients: %w{marklocklear@extension.org}
     }
 end
