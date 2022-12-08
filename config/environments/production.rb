@@ -114,4 +114,11 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+    email_prefix: '[PREFIX] ',
+    sender_address: %{"notifier" <marklocklear@extension.org>},
+    exception_recipients: %w{exceptions@example.com}
+    }
 end
