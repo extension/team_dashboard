@@ -53,7 +53,8 @@ class Team < ApplicationRecord
 	#before an email is sent to the team
 
 	def self.initial_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Initial Baseline Survey").count
+		# survey_count = team.surveys.where(name: "Initial Baseline Survey").count
+		survey_count = team.surveys.where(name: "Initial Baseline Survey").first.submissions.count
 		if progress_in_days == 60 && survey_count < team.number_of_team_members
 			#two months into this phase and all team members have not submitted survey, send a nag message to team lead
 			TeamMailer.with(email: team.leader_email, team_name: team.name, leader_name: team.leader_name, survey_count: survey_count, total_team_members: team.number_of_team_members).initial_survey_nag_email.deliver_now
@@ -68,7 +69,7 @@ class Team < ApplicationRecord
 	end
 
 	def self.second_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Second Survey").count
+		survey_count = team.surveys.where(name: "Second Survey").first.submissions.count
 		if progress_in_days == 90
 			#send 2nd survey notification to all team members
 			team.get_team_member_emails.each do |email|
@@ -88,7 +89,7 @@ class Team < ApplicationRecord
 	end
 
 	def self.third_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Third Survey").count
+		survey_count = team.surveys.where(name: "Third Survey").first.submissions.count
 		if progress_in_days == 180 
 			team.get_team_member_emails.each do |email|
 				TeamMailer.with(email: email, team_name: team.name).third_survey_email.deliver_now
@@ -107,7 +108,7 @@ class Team < ApplicationRecord
 	end
 
 	def self.final_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Final Survey").count
+		survey_count = team.surveys.where(name: "Final Survey").first.submissions.count
 		if progress_in_days == 271
 			team.get_team_member_emails.each do |email|
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).final_survey_email.deliver_now
