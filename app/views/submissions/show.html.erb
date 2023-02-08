@@ -5,7 +5,8 @@
 <h2><%= @submission.survey.name %></h2>
 <p><%= link_to "view all submissions", team_survey_path(@submission.survey.team, @submission.survey) %></p>
 
-<h1>Submission <%= @submission.submitted_date %></h1>
+<h1>Submission</h1>
+<h4><%= @submission.created_at %></h4>
 
 <div class="responses-scores">
   <div>

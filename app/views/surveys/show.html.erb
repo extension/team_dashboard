@@ -26,7 +26,7 @@
 
     <% @survey.submissions.each do |submission| %>
       <tr>
-        <td><%= link_to submission.submitted_date, team_survey_submission_path(submission.survey.team, submission.survey, submission) %></td>
+        <td>Submitted on: <%= link_to submission.created_at, team_survey_submission_path(submission.survey.team, submission.survey, submission) %></td>
         <td class="avg_score"><span><%= submission.individual_psychological_safety_avg_score.round(2) %></span></td>
         <td class="avg_score"><span><%= submission.individual_dependability_avg_score.round(2) %></span></td>
         <td class="avg_score"><span><%= submission.individual_structure_clarity_avg_score.round(2) %></span></td>
