@@ -31,6 +31,11 @@ class Team < ApplicationRecord
 	#notifications all teams. Note their is no initial notification for teams. That
 	#notifcation will come from the team leader who creates the team
 	def self.get_next_survey_notification
+		mailer = ActionMailer::Base.new
+		mailer.mail(from: 'sender@example.com',
+								to: 'marklocklear@gmail.com',
+								subject: 'test of heroku cron',
+								body: "Hello, you've got mail!").deliver
 		teams = Team.where.associated(:surveys).distinct #only check teams that have at least one survey
 		teams.each do |team|
 			first_baseline_submission = team.surveys.where(name: "Initial Baseline Survey").pluck(:created_at).min
