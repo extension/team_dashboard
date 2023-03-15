@@ -69,7 +69,9 @@ class Team < ApplicationRecord
 	end
 
 	def self.second_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Second Survey").first.submissions.count
+		check_survey_count = team.surveys.where(name: "Second Survey").first&.submissions&.count 
+		survey_count = check_survey_count.nil? ? 0 : check_survey_count
+
 		if progress_in_days == 90
 			#send 2nd survey notification to all team members
 			team.get_team_member_emails.each do |email|
@@ -89,7 +91,8 @@ class Team < ApplicationRecord
 	end
 
 	def self.third_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Third Survey").first.submissions.count
+		check_survey_count = team.surveys.where(name: "Third Survey").first&.submissions&.count 
+		survey_count = check_survey_count.nil? ? 0 : check_survey_count
 		if progress_in_days == 180 
 			team.get_team_member_emails.each do |email|
 				TeamMailer.with(email: email, team_name: team.name).third_survey_email.deliver_now
@@ -108,7 +111,8 @@ class Team < ApplicationRecord
 	end
 
 	def self.final_survey_notification(team, progress_in_days)
-		survey_count = team.surveys.where(name: "Final Survey").first.submissions.count
+		check_survey_count = team.surveys.where(name: "Final Survey").first&.submissions&.count 
+		survey_count = check_survey_count.nil? ? 0 : check_survey_count
 		if progress_in_days == 271
 			team.get_team_member_emails.each do |email|
 				TeamMailer.with(email: email, team: team.name, slug: team.slug).final_survey_email.deliver_now
