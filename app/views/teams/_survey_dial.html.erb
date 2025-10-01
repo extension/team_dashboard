@@ -10,7 +10,9 @@ end
 
 
 
-  <h2><%= name -%></h2>
+<h2><%= name -%></h2>
+
+<% if surveys.any? %>
   <div class="gauge-wrapper">
 
       <div class="range">
@@ -35,3 +37,4 @@ end
   <div>
     <% pp surveys -%> <!-- hide hash for now -->
   </div>
+<% end %>
