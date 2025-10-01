@@ -2,7 +2,7 @@ class Team < ApplicationRecord
 	has_many :surveys
 	validates :leader_name, :leader_email, :name, :number_of_team_members, presence: true
 	validates :name, uniqueness: true
-	serialize :survey_status, Hash
+	serialize :survey_status #, Hash
 
 	extend FriendlyId
 	friendly_id :slug, use: :slugged
